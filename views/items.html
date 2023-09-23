@@ -5,9 +5,10 @@
   {{range $item := .}}
   <li class="{{if $item.Done }}completed{{end}}">
     <div class="view">
-      <input class="toggle" type="checkbox" {{if $item.Done }}checked{{end}}>
+      <input class="toggle" type="checkbox" name="done" {{if $item.Done }}checked{{end}} hx-put="/todos/{{ $item.Id }}"
+        hx-target=".todo-list">
       <label>{{$item.Title}}</label>
-      <button class="destroy" hx-delete="/{{ $item.Id }}" hx-target=".todo-list"></button>
+      <button class="destroy" hx-delete="/todos/{{ $item.Id }}" hx-target=".todo-list"></button>
     </div>
     <input class=" edit" value="Create a TodoMVC template">
   </li>

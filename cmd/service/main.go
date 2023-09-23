@@ -36,8 +36,9 @@ func main() {
 	e.Static("/", "public/")
 
 	e.GET("/", items.GetItems)
-	e.POST("/", items.AddItem)
-	e.DELETE("/:id", items.DeleteItem)
+	e.POST("/todos", items.AddItem)
+	e.DELETE("/todos/:id", items.DeleteItem)
+	e.PUT("/todos/:id", items.UpdateItem)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }

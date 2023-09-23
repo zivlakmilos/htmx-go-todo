@@ -30,7 +30,22 @@ func AddItem(c echo.Context) error {
 }
 
 func UpdateItem(c echo.Context) error {
-	return c.Render(http.StatusOK, "index.html", items)
+	id := c.Param("id")
+
+	for idx, item := range items {
+		if item.Id == id {
+			if c.FormValue("todo") != "" {
+			}
+			if c.FormValue("done") == "on" {
+				items[idx].Done = true
+			} else {
+				items[idx].Done = false
+			}
+			break
+		}
+	}
+
+	return c.Render(http.StatusOK, "items", items)
 }
 
 func DeleteItem(c echo.Context) error {
