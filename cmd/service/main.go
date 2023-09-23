@@ -4,10 +4,10 @@ import (
 	"html/template"
 	"io"
 	"log"
-	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/zivlakmilos/htmx-go-todo/internal/items"
 )
 
 type Template struct {
@@ -31,11 +31,12 @@ func main() {
 	}
 
 	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
 	e.Static("/", "public/")
 
-	e.GET("/", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "index.html", nil)
-	})
+	e.GET("/", items.GetItems)
+	e.POST("/", items.AddItem)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
