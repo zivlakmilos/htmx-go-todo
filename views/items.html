@@ -7,9 +7,9 @@
     <div class="view">
       <input class="toggle" type="checkbox" {{if $item.Done }}checked{{end}}>
       <label>{{$item.Title}}</label>
-      <button class="destroy"></button>
+      <button class="destroy" hx-delete="/{{ $item.Id }}" hx-target=".todo-list"></button>
     </div>
-    <input class="edit" value="Create a TodoMVC template">
+    <input class=" edit" value="Create a TodoMVC template">
   </li>
   {{end}}
 </ul>

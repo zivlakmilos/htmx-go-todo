@@ -34,5 +34,17 @@ func UpdateItem(c echo.Context) error {
 }
 
 func DeleteItem(c echo.Context) error {
-	return c.Render(http.StatusOK, "index.html", items)
+	id := c.Param("id")
+
+	newItems := make([]Item, 0)
+	for _, item := range items {
+		if item.Id == id {
+			continue
+		}
+		newItems = append(newItems, item)
+	}
+
+	items = newItems
+
+	return c.Render(http.StatusOK, "items", items)
 }

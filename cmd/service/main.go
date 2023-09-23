@@ -37,6 +37,7 @@ func main() {
 
 	e.GET("/", items.GetItems)
 	e.POST("/", items.AddItem)
+	e.DELETE("/:id", items.DeleteItem)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
